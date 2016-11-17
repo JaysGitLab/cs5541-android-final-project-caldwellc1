@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">FoodCents</string>
+    <string name="food_title_label">Product name:</string>
+    <string name="food_title_hint">Enter a name of food.</string>
+    <string name="food_details_label">Prices:</string>
+    <string name="food_store_label">Store</string>
+    <string name="food_reg_label">Regular Price</string>
+    <string name="food_current_label">Current Price</string>
+    <string name="food_good_label">Good Price</string>
+    <string name="new_food">New Food</string>
+    <string name="show_subtitle">Subtitle</string>
+    <string name="search">Search</string>
+    <string name="remove">Remove</string>
+    <string name="sort">Sort</string>
 </resources>

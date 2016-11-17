@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_item_new_crime"
+        android:icon="@drawable/ic_menu_add"
+        android:title="@string/new_food"
+        app:showAsAction="ifRoom|withText"/>
+    <item
+        android:id="@+id/menu_item_show_subtitle"
+        android:title="@string/show_subtitle"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menu_item_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:showAsAction="ifRoom|withText"
+        />
+    <item
+        android:id="@+id/menu_item_del"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/remove"
+        app:showAsAction="ifRoom|withText"
+        />
+    <item
+        android:id="@+id/menu_item_sort"
+        android:icon="@drawable/ic_sort"
+        android:title="@string/sort"
+        app:showAsAction="ifRoom|withText"
+        />
+</menu>
