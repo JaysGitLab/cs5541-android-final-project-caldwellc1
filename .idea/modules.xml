@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FoodCents.iml" filepath="$PROJECT_DIR$/FoodCents.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cs5541-android-final-project-caldwellc1.iml" filepath="$PROJECT_DIR$/cs5541-android-final-project-caldwellc1.iml" />
     </modules>
   </component>
 </project>

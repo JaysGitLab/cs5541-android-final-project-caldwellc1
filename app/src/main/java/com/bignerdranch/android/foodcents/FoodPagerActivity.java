@@ -17,10 +17,10 @@ public class FoodPagerActivity extends AppCompatActivity {
             "com.bignerdranch.android.criminalintent.crime_id";
 
     private ViewPager mViewPager;
-    private List<Food> mCrimes;
+    private List<Food> mFoods;
 
     public static Intent newIntent(Context packageContext, UUID crimeId){
-        Intent intent = new Intent(packageContext, com.bignerdranch.android.criminalintent.FoodPagerActivity.class);
+        Intent intent = new Intent(packageContext, com.bignerdranch.android.foodcents.FoodPagerActivity.class);
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
         return intent;
     }
@@ -32,24 +32,24 @@ public class FoodPagerActivity extends AppCompatActivity {
 
         UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
 
-        mViewPager = (ViewPager) findViewById(R.id.activity_crime_pager_view_pager);
+        mViewPager = (ViewPager) findViewById(R.id.activity_food_pager_view_pager);
 
-        mCrimes = FoodLab.get(this).getCrimes();
+        mFoods = FoodLab.get(this).getCrimes();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {
-                Food crime = mCrimes.get(position);
+                Food crime = mFoods.get(position);
                 return FoodFragment.newInstance(crime.getId());
             }
 
             @Override
             public int getCount() {
-                return mCrimes.size();
+                return mFoods.size();
             }
         });
-        for(int i=0;i<mCrimes.size();i++){
-            if(mCrimes.get(i).getId().equals(crimeId)){
+        for(int i=0;i<mFoods.size();i++){
+            if(mFoods.get(i).getId().equals(crimeId)){
                 mViewPager.setCurrentItem(i);
                 break;
             }

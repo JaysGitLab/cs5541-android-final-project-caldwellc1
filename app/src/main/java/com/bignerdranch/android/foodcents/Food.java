@@ -3,20 +3,19 @@ package com.bignerdranch.android.foodcents;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * Created by caldwellc1 on 9/15/2016.
- */
+
 public class Food {
     private UUID mId;
     private String mTitle;
     private Date mDate;
-    private boolean mSolved;
-    private String mSuspect;
+    private Double mRegular;
+    private Double mCurrent;
+    private boolean mGood;
+    private String mStore;
 
     public Food(){
         //Generate unique identifier
         this(UUID.randomUUID());
-
     }
 
     public Food(UUID id){
@@ -44,20 +43,36 @@ public class Food {
         mDate = date;
     }
 
-    public boolean isSolved() {
-        return mSolved;
+    public double getRegular() {
+        return mRegular;
     }
 
-    public void setSolved(boolean solved) {
-        mSolved = solved;
+    public void setRegular(double reg) {
+        mRegular = reg;
     }
 
-    public String getSuspect(){
-        return mSuspect;
+    public double getCurrent() {
+        return mCurrent;
     }
 
-    public void setSuspect(String suspect){
-        mSuspect = suspect;
+    public void setCurrent(double curr) {
+        mCurrent = curr;
+    }
+
+    public boolean isGood() {
+        return mGood;
+    }
+
+    public void setGood(boolean g) {
+        mGood = g;
+    }
+
+    public String getStore(){
+        return mStore;
+    }
+
+    public void setStore(String store){
+        mStore = store;
     }
 
     public String getPhotoFilename(){
