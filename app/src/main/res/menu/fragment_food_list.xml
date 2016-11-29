@@ -2,14 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_item_new_crime"
+        android:id="@+id/menu_item_new_food"
         android:icon="@drawable/ic_menu_add"
         android:title="@string/new_food"
         app:showAsAction="ifRoom|withText"/>
-    <item
-        android:id="@+id/menu_item_show_subtitle"
-        android:title="@string/show_subtitle"
-        app:showAsAction="ifRoom"/>
+
     <item
         android:id="@+id/menu_item_search"
         android:icon="@drawable/ic_search"

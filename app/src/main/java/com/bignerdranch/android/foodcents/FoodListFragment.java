@@ -3,7 +3,6 @@ package com.bignerdranch.android.foodcents;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,28 +49,29 @@ public class FoodListFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_crime_list, menu);
+        inflater.inflate(R.menu.fragment_food_list, menu);
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.menu_item_new_crime:
-                Food crime = new Food();
-                FoodLab.get(getActivity()).addCrime(crime);
-                Intent intent = FoodPagerActivity.newIntent(getActivity(), crime.getId());
+            case R.id.menu_item_new_food:
+                Food food = new Food();
+                FoodLab.get(getActivity()).addFood(food);
+                Intent intent = FoodPagerActivity.newIntent(getActivity(), food.getId());
                 startActivity(intent);
                 return true;
-            case R.id.menu_item_show_subtitle:
-                mSubtitleVisible = !mSubtitleVisible;
-                getActivity().invalidateOptionsMenu();
+            case R.id.menu_item_del:
+                return true;
+            case R.id.menu_item_search:
+                return true;
+            case R.id.menu_item_sort:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -79,14 +79,14 @@ public class FoodListFragment extends Fragment {
     }
 
     private void updateUI(){
-        FoodLab crimeLab = FoodLab.get(getActivity());
-        List<Food> crimes = crimeLab.getCrimes();
+        FoodLab foodLab = FoodLab.get(getActivity());
+        List<Food> foods = foodLab.getFoods();
         if (mAdapter == null) {
-            mAdapter = new CrimeAdapter(crimes);
+            mAdapter = new CrimeAdapter(foods);
             mCrimeRecyclerView.setAdapter(mAdapter);
         }
         else{
-            mAdapter.setCrimes(crimes);
+            mAdapter.setFoods(foods);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -120,10 +120,10 @@ public class FoodListFragment extends Fragment {
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder>{
-        private List<Food> mCrimes;
+        private List<Food> mFoods;
 
         public CrimeAdapter(List<Food> crimes){
-            mCrimes = crimes;
+            mFoods = crimes;
         }
 
         @Override
@@ -135,17 +135,17 @@ public class FoodListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position){
-            Food crime = mCrimes.get(position);
+            Food crime = mFoods.get(position);
             holder.bindCrime(crime);
         }
 
         @Override
         public int getItemCount(){
-            return mCrimes.size();
+            return mFoods.size();
         }
 
-        public void setCrimes(List<Food> crimes){
-            mCrimes = crimes;
+        public void setFoods(List<Food> foods){
+            mFoods = foods;
         }
     }
 }

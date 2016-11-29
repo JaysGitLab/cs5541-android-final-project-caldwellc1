@@ -34,7 +34,7 @@ public class FoodPagerActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.activity_food_pager_view_pager);
 
-        mFoods = FoodLab.get(this).getCrimes();
+        mFoods = FoodLab.get(this).getFoods();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override

@@ -18,15 +18,15 @@ import java.util.UUID;
 
 
 public class FoodLab {
-    private static FoodLab sCrimeLab;
+    private static FoodLab sFoodLab;
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
     public static FoodLab get(Context context){
-        if(sCrimeLab == null){
-            sCrimeLab = new FoodLab(context);
+        if(sFoodLab == null){
+            sFoodLab = new FoodLab(context);
         }
-        return sCrimeLab;
+        return sFoodLab;
     }
 
     private FoodLab(Context context){
@@ -34,20 +34,20 @@ public class FoodLab {
         mDatabase = new FoodBaseHelper(mContext).getWritableDatabase();
     }
 
-    public void addCrime(Food c){
+    public void addFood(Food c){
         ContentValues values = getContentValues(c);
         mDatabase.insert(FoodTable.NAME, null, values);
     }
 
-    public List<Food> getCrimes(){
-        List<Food> crimes = new ArrayList<>();
+    public List<Food> getFoods(){
+        List<Food> foods = new ArrayList<>();
 
-        FoodCursorWrapper cursor = queryCrimes(null, null);
+        FoodCursorWrapper cursor = queryFoods(null, null);
 
         try{
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
-                crimes.add(cursor.getFood());
+                foods.add(cursor.getFood());
                 cursor.moveToNext();
             }
         }
@@ -55,11 +55,11 @@ public class FoodLab {
             cursor.close();
         }
 
-        return crimes;
+        return foods;
     }
 
-    public Food getCrime(UUID id){
-        FoodCursorWrapper cursor = queryCrimes(
+    public Food getFood(UUID id){
+        FoodCursorWrapper cursor = queryFoods(
                 FoodTable.Cols.UUID + " = ?", new String[] {id.toString()});
         try{
             if (cursor.getCount() == 0){
@@ -73,17 +73,17 @@ public class FoodLab {
         }
     }
 
-    public File getPhotoFile(Food crime){
+    public File getPhotoFile(Food food){
         File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         if(externalFilesDir == null){
             return null;
         }
-        return new File(externalFilesDir, crime.getPhotoFilename());
+        return new File(externalFilesDir, food.getPhotoFilename());
     }
 
-    public void updateCrime(Food crime){
-        String uuidString = crime.getId().toString();
-        ContentValues values = getContentValues(crime);
+    public void updateFood(Food food){
+        String uuidString = food.getId().toString();
+        ContentValues values = getContentValues(food);
 
         mDatabase.update(FoodTable.NAME, values,
                 FoodTable.Cols.UUID + " = ?", new String[] { uuidString });
@@ -102,7 +102,7 @@ public class FoodLab {
         return values;
     }
 
-    private FoodCursorWrapper queryCrimes(String whereClause, String[] whereArgs){
+    private FoodCursorWrapper queryFoods(String whereClause, String[] whereArgs){
         Cursor cursor = mDatabase.query(FoodTable.NAME, null, whereClause,
                 whereArgs, null, null, null);
         return new FoodCursorWrapper(cursor);

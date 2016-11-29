@@ -2,40 +2,28 @@ package com.bignerdranch.android.foodcents;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.text.format.DateFormat;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
-import java.util.Date;
 import java.util.UUID;
 
 
 public class FoodFragment extends Fragment{
 
-    private static final String ARG_CRIME_ID = "crime_id";
-    private static final String DIALOG_DATE = "DialogDate";
-    private static final String DIALOG_TIME = "DialogTime";
-    private static final int REQUEST_CONTACT = 0;
-    private static final int REQUEST_PHOTO = 1;
+    private static final String ARG_FOOD_ID = "food_id";
+    private static final int REQUEST_PHOTO = 0;
 
     private Food mFood;
     private EditText mTitleField;
@@ -45,7 +33,7 @@ public class FoodFragment extends Fragment{
 
     public static FoodFragment newInstance(UUID crimeId){
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CRIME_ID, crimeId);
+        args.putSerializable(ARG_FOOD_ID, crimeId);
 
         FoodFragment fragment = new FoodFragment();
         fragment.setArguments(args);
@@ -55,8 +43,8 @@ public class FoodFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
-        mFood = FoodLab.get(getActivity()).getCrime(crimeId);
+        UUID crimeId = (UUID) getArguments().getSerializable(ARG_FOOD_ID);
+        mFood = FoodLab.get(getActivity()).getFood(crimeId);
         mPhotoFile = FoodLab.get(getActivity()).getPhotoFile(mFood);
     }
 
@@ -64,7 +52,7 @@ public class FoodFragment extends Fragment{
     public void onPause(){
         super.onPause();
 
-        FoodLab.get(getActivity()).updateCrime(mFood);
+        FoodLab.get(getActivity()).updateFood(mFood);
     }
 
     @Override

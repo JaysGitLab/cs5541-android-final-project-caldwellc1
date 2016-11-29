@@ -9,7 +9,7 @@ import com.bignerdranch.android.foodcents.database.FoodDbSchema.FoodTable;
 
 public class FoodBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "crimeBase.db";
+    private static final String DATABASE_NAME = "foodBase.db";
 
     public FoodBaseHelper(Context context){
         super(context, DATABASE_NAME, null, VERSION);
