@@ -8,8 +8,8 @@ public class Food {
     private UUID mId;
     private String mTitle;
     private Date mDate;
-    private Double mRegular;
-    private Double mCurrent;
+    private int mRegular;
+    private int mCurrent;
     private boolean mGood;
     private String mStore;
 
@@ -43,19 +43,19 @@ public class Food {
         mDate = date;
     }
 
-    public double getRegular() {
+    public int getRegular() {
         return mRegular;
     }
 
-    public void setRegular(double reg) {
+    public void setRegular(int reg) {
         mRegular = reg;
     }
 
-    public double getCurrent() {
+    public int getCurrent() {
         return mCurrent;
     }
 
-    public void setCurrent(double curr) {
+    public void setCurrent(int curr) {
         mCurrent = curr;
     }
 

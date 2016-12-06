@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.UUID;
 
 
@@ -30,6 +31,7 @@ public class FoodFragment extends Fragment{
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private File mPhotoFile;
+    private String goods;
 
     public static FoodFragment newInstance(UUID crimeId){
         Bundle args = new Bundle();
@@ -72,7 +74,67 @@ public class FoodFragment extends Fragment{
             public void afterTextChanged(Editable s) {
             }
         });
-
+        mTitleField = (EditText)v.findViewById(R.id.food_reg);
+        mTitleField.setText(String.valueOf(mFood.getRegular()));
+        mTitleField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String sss = s.toString();
+                mFood.setRegular(Integer.parseInt(sss));
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        mTitleField = (EditText)v.findViewById(R.id.food_current);
+        mTitleField.setText(String.valueOf(mFood.getCurrent()));
+        mTitleField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String sss = s.toString();
+                mFood.setCurrent(Integer.parseInt(sss));
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        mTitleField = (EditText)v.findViewById(R.id.food_store);
+        mTitleField.setText(mFood.getStore());
+        mTitleField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mFood.setStore(s.toString());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        mTitleField = (EditText)v.findViewById(R.id.food_good);
+        if (mFood.isGood()){ goods="Y";}
+        else{goods="N";}
+        mTitleField.setText(goods);
+        mTitleField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s=="Y"){mFood.setGood(true);}
+                else{mFood.setGood(false);}
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         mPhotoButton = (ImageButton) v.findViewById(R.id.food_camera);
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

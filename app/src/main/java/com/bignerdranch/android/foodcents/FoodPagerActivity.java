@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class FoodPagerActivity extends AppCompatActivity {
     private static final String EXTRA_CRIME_ID =
-            "com.bignerdranch.android.criminalintent.crime_id";
+            "com.bignerdranch.android.foodcents.food_id";
 
     private ViewPager mViewPager;
     private List<Food> mFoods;
@@ -39,8 +39,8 @@ public class FoodPagerActivity extends AppCompatActivity {
         mViewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {
-                Food crime = mFoods.get(position);
-                return FoodFragment.newInstance(crime.getId());
+                Food food = mFoods.get(position);
+                return FoodFragment.newInstance(food.getId());
             }
 
             @Override
@@ -48,6 +48,22 @@ public class FoodPagerActivity extends AppCompatActivity {
                 return mFoods.size();
             }
         });
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+
+            @Override
+            public void onPageSelected(int position) {
+                Food food = mFoods.get(position);
+                if (food.getTitle() != null) {
+                    setTitle(food.getTitle());
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) { }
+        });
+
         for(int i=0;i<mFoods.size();i++){
             if(mFoods.get(i).getId().equals(crimeId)){
                 mViewPager.setCurrentItem(i);

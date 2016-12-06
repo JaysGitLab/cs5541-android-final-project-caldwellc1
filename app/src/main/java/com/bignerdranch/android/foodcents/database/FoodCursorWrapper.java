@@ -18,8 +18,8 @@ public class FoodCursorWrapper extends CursorWrapper{
         String uuidString = getString(getColumnIndex(FoodTable.Cols.UUID));
         String title = getString(getColumnIndex(FoodTable.Cols.TITLE));
         String store = getString(getColumnIndex(FoodTable.Cols.STORE));
-        double current = getDouble(getColumnIndex(FoodTable.Cols.CURRENT));
-        double regular = getDouble(getColumnIndex(FoodTable.Cols.REGULAR));
+        int current = getInt(getColumnIndex(FoodTable.Cols.CURRENT));
+        int regular = getInt(getColumnIndex(FoodTable.Cols.REGULAR));
         int isDeal = getInt(getColumnIndex(FoodTable.Cols.GOODP));
         long date = getLong(getColumnIndex(FoodTable.Cols.DATE));
 

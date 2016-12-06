@@ -108,7 +108,7 @@ public class FoodListFragment extends Fragment {
         public void bindCrime(Food crime) {
             mFood = crime;
             mTitleTextView.setText(mFood.getTitle());
-            //mCurrentTextView.setText(mFood.toString(mFood.getCurrent()));
+            mCurrentTextView.setText(String.valueOf(mFood.getCurrent()));
         }
 
         @Override
