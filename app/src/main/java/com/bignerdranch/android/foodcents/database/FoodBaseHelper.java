@@ -8,7 +8,7 @@ import com.bignerdranch.android.foodcents.database.FoodDbSchema.FoodTable;
 
 
 public class FoodBaseHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 2;
+    private static final int VERSION = 4;
     private static final String DATABASE_NAME = "foodBase.db";
 
     public FoodBaseHelper(Context context){
@@ -22,8 +22,8 @@ public class FoodBaseHelper extends SQLiteOpenHelper {
                 FoodTable.Cols.UUID + ", " +
                 FoodTable.Cols.TITLE + ", " +
                 FoodTable.Cols.STORE + ", " +
-                FoodTable.Cols.CURRENT + "INTEGER DEFAULT 0, " +
-                FoodTable.Cols.REGULAR + "INTEGER DEFAULT 0, " +
+                FoodTable.Cols.CURRENT + ", " +
+                FoodTable.Cols.REGULAR + ", " +
                 FoodTable.Cols.GOODP + ", " +
                 FoodTable.Cols.DATE + ")");
 

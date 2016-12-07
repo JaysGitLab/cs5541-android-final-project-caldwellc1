@@ -43,15 +43,13 @@ public class FoodLab {
         List<Food> foods = new ArrayList<>();
 
         FoodCursorWrapper cursor = queryFoods(null, null);
-
-        try{
+        try {
             cursor.moveToFirst();
-            while (!cursor.isAfterLast()){
+            while (!cursor.isAfterLast()) {
                 foods.add(cursor.getFood());
                 cursor.moveToNext();
             }
-        }
-        finally {
+        }finally{
             cursor.close();
         }
 

@@ -33,9 +33,9 @@ public class FoodFragment extends Fragment{
     private File mPhotoFile;
     private String goods;
 
-    public static FoodFragment newInstance(UUID crimeId){
+    public static FoodFragment newInstance(UUID foodId){
         Bundle args = new Bundle();
-        args.putSerializable(ARG_FOOD_ID, crimeId);
+        args.putSerializable(ARG_FOOD_ID, foodId);
 
         FoodFragment fragment = new FoodFragment();
         fragment.setArguments(args);
@@ -45,8 +45,8 @@ public class FoodFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_FOOD_ID);
-        mFood = FoodLab.get(getActivity()).getFood(crimeId);
+        UUID foodId = (UUID) getArguments().getSerializable(ARG_FOOD_ID);
+        mFood = FoodLab.get(getActivity()).getFood(foodId);
         mPhotoFile = FoodLab.get(getActivity()).getPhotoFile(mFood);
     }
 

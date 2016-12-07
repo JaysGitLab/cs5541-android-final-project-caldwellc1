@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class FoodPagerActivity extends AppCompatActivity {
-    private static final String EXTRA_CRIME_ID =
+    private static final String EXTRA_FOOD_ID =
             "com.bignerdranch.android.foodcents.food_id";
 
     private ViewPager mViewPager;
@@ -21,7 +21,7 @@ public class FoodPagerActivity extends AppCompatActivity {
 
     public static Intent newIntent(Context packageContext, UUID crimeId){
         Intent intent = new Intent(packageContext, com.bignerdranch.android.foodcents.FoodPagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
+        intent.putExtra(EXTRA_FOOD_ID, crimeId);
         return intent;
     }
 
@@ -30,7 +30,7 @@ public class FoodPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_pager);
 
-        UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
+        UUID foodId = (UUID) getIntent().getSerializableExtra(EXTRA_FOOD_ID);
 
         mViewPager = (ViewPager) findViewById(R.id.activity_food_pager_view_pager);
 
@@ -65,7 +65,7 @@ public class FoodPagerActivity extends AppCompatActivity {
         });
 
         for(int i=0;i<mFoods.size();i++){
-            if(mFoods.get(i).getId().equals(crimeId)){
+            if(mFoods.get(i).getId().equals(foodId)){
                 mViewPager.setCurrentItem(i);
                 break;
             }
