@@ -111,6 +111,7 @@ public class FoodListFragment extends Fragment {
         }
     }
 
+
     private void updateUItwo(){
         FoodLab foodLab = FoodLab.get(getActivity());
         List<Food> foods = foodLab.getFoodsTwo();
@@ -122,6 +123,7 @@ public class FoodListFragment extends Fragment {
             mAdapter.setFoods(foods);
             mAdapter.notifyDataSetChanged();
         }
+
     }
 
     private void updateUI(){
