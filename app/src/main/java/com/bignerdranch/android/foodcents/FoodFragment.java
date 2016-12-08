@@ -10,6 +10,9 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -48,6 +51,7 @@ public class FoodFragment extends Fragment{
         UUID foodId = (UUID) getArguments().getSerializable(ARG_FOOD_ID);
         mFood = FoodLab.get(getActivity()).getFood(foodId);
         mPhotoFile = FoodLab.get(getActivity()).getPhotoFile(mFood);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -56,6 +60,30 @@ public class FoodFragment extends Fragment{
 
         FoodLab.get(getActivity()).updateFood(mFood);
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_food_list, menu);
+        menu.findItem(R.id.menu_item_del).setVisible(true);
+        menu.findItem(R.id.menu_item_new_food).setVisible(false);
+        menu.findItem(R.id.menu_item_search).setVisible(false);
+        menu.findItem(R.id.menu_item_sort).setVisible(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_item_del:
+                UUID foodId = (UUID) getArguments().getSerializable(ARG_FOOD_ID);
+                mFood = FoodLab.get(getActivity()).getFood(foodId);
+                FoodLab.get(getActivity()).deleteFood(mFood);
+                getActivity().finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){

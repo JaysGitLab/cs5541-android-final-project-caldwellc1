@@ -39,6 +39,12 @@ public class FoodLab {
         mDatabase.insert(FoodTable.NAME, null, values);
     }
 
+    public void deleteFood(Food f){
+        String uuidString = f.getId().toString();
+        mDatabase.delete(FoodTable.NAME, FoodTable.Cols.UUID + " = ?", new String[] { uuidString });
+    }
+
+
     public List<Food> getFoods(){
         List<Food> foods = new ArrayList<>();
 
@@ -55,6 +61,48 @@ public class FoodLab {
 
         return foods;
     }
+
+    public List<Food> getFoodsTwo(){
+        sortFoods();
+        List<Food> foods = new ArrayList<>();
+
+        FoodCursorWrapper cursor = queryFoods(null, null);
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                foods.add(cursor.getFood());
+                cursor.moveToNext();
+            }
+        }finally{
+            cursor.close();
+        }
+
+        return foods;
+    }
+
+    public FoodCursorWrapper sortFoods(){
+        Cursor cursor = mDatabase.query(FoodTable.NAME, null, null,
+                null, null, null, FoodTable.Cols.TITLE + "ASC");
+        return new FoodCursorWrapper(cursor);
+    }
+
+    public List<Food> searchFoods(String searchValue){
+        List<Food> foods = new ArrayList<>();
+
+        FoodCursorWrapper cursor = queryFoods(null, null);
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                foods.add(cursor.getFood());
+                cursor.moveToNext();
+            }
+        }finally{
+            cursor.close();
+        }
+
+        return foods;
+    }
+
 
     public Food getFood(UUID id){
         FoodCursorWrapper cursor = queryFoods(

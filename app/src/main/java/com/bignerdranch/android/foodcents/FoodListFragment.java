@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,11 +54,43 @@ public class FoodListFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_food_list, menu);
+        menu.findItem(R.id.menu_item_del).setVisible(false);
+        menu.findItem(R.id.menu_item_new_food).setVisible(true);
+        menu.findItem(R.id.menu_item_search).setVisible(true);
+        menu.findItem(R.id.menu_item_sort).setVisible(true);
+
+        /*MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                QueryPreferences.setStoredQuery(getActivity(), s);
+                searchView.clearFocus();
+                searchView.setVisibility(View.GONE);
+                updateItems();
+                return true;
+            }
+
+        });
+        searchView.setOnSearchClickListener(new View.OnClickListener(){
+            @Override
+             public void onClick(View v){
+                String query = QueryPreferences.getStoredQuery(getActivity());
+                searchView.setQuery(query, false);
+                }
+             });*/
 
     }
+
+    /*private void updateItems(){
+        String query = QueryPreferences.getStoredQuery(getActivity());
+        new FetchItemsTask(query).execute();
+        }*/
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -67,14 +101,26 @@ public class FoodListFragment extends Fragment {
                 Intent intent = FoodPagerActivity.newIntent(getActivity(), food.getId());
                 startActivity(intent);
                 return true;
-            case R.id.menu_item_del:
-                return true;
             case R.id.menu_item_search:
                 return true;
             case R.id.menu_item_sort:
+                updateUItwo();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void updateUItwo(){
+        FoodLab foodLab = FoodLab.get(getActivity());
+        List<Food> foods = foodLab.getFoodsTwo();
+        if (mAdapter == null) {
+            mAdapter = new CrimeAdapter(foods);
+            mCrimeRecyclerView.setAdapter(mAdapter);
+        }
+        else{
+            mAdapter.setFoods(foods);
+            mAdapter.notifyDataSetChanged();
         }
     }
 
